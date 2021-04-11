@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const {sequelize} = require('./models');
 const apiRouter = require('./routes/routes')
+const cors = require('cors');
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
@@ -13,6 +14,8 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 const app = express();
 
 
+//Enable Cross Orging Resource Sharing
+app.use(cors());
 
 //Use to parse json
 app.use(express.json());
