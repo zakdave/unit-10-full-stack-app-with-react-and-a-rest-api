@@ -1,14 +1,22 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import './styles/global.css';
 
-import Courses from '.components/Courses';
+import Courses from './components/Courses';
+import Header from './components/Header'
 
 import withContext from './Context';
+
+const CoursesContext = withContext(Courses);
+const HeaderContext = withContext(Header);
 
 const App = () => (
   <BrowserRouter>
     <div>
-      <p> Test</p>
+      <HeaderContext/>
+      <Switch>
+        <Route exact patch='/' component={CoursesContext}/>
+      </Switch>
     </div>
   </BrowserRouter>
 );
