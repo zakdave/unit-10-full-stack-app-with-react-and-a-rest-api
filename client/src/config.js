@@ -1,4 +1,3 @@
-const apiBaseUrl = {
-    apiBaseUrl : `http://localhost:5000/api`
+export const config = {
+    urlBase : `http://localhost:5000/api`
 }
-export default apiBaseUrl;

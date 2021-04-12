@@ -1,9 +1,9 @@
-import config from './config';
+import {config} from './config';
 
 export default class Data {
 
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
-        const url = config.apiBaseUrl + path;
+        const url = config.urlBase + path;
 
         const options = {
             method,
