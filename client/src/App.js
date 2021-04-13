@@ -5,12 +5,14 @@ import './styles/global.css';
 import Header from './components/Header';
 import Courses from './components/Courses';
 import Course from './components/Course';
+import SignUp from './components/SignUp';
 
 import withContext from './Context';
 
 const HeaderContext = withContext(Header);
 const CoursesContext = withContext(Courses);
 const CourseContext = withContext(Course);
+const SignUpContext = withContext(SignUp);
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +21,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={CoursesContext}/>
         <Route exact path='/courses/:id' component={CourseContext} />
+        <Route path='/signup' component={SignUpContext} />
       </Switch>
     </div>
   </BrowserRouter>
