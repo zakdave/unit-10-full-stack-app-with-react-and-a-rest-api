@@ -10,6 +10,7 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateCourse from './components/CreateCourse';
+import UpdateCourse from './components/UpdateCourse';
 
 import withContext from './Context';
 
@@ -20,6 +21,7 @@ const SignUpContext = withContext(SignUp);
 const SignInContext = withContext(SignIn);
 const SignOutContext = withContext(SignOut);
 const CreateCourseContext = withContext(CreateCourse);
+const UpdateCourseContext = withContext(UpdateCourse);
 
 const App = () => (
   <BrowserRouter>
@@ -28,10 +30,11 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={CoursesContext}/>
         <ProtectedRoute path="/courses/create" component={CreateCourseContext}/>
-        <Route exact path='/courses/:id' component={CourseContext} />
-        <Route path='/signup' component={SignUpContext} />
-        <Route path='/signin' component={SignInContext} />
-        <Route path='/signout' component={SignOutContext} />
+        <ProtectedRoute path='/courses/:id/update' component={UpdateCourseContext}/>
+        <Route exact path='/courses/:id' component={CourseContext}/>
+        <Route path='/signup' component={SignUpContext}/>
+        <Route path='/signin' component={SignInContext}/>
+        <Route path='/signout' component={SignOutContext}/>
       </Switch>
     </div>
   </BrowserRouter>
