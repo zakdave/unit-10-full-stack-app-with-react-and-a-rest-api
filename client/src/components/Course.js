@@ -3,12 +3,12 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom';
 
-const CourseDetail = ({ context }) => {
-    // Get access to the url
+const Course = ({ context }) => {
+    
     let history = useHistory();
     const id = history.location.pathname.slice(9);
 
-    // State with react hooks
+    
     const [course, setCourse] = useState({});
     const [author, setAuthor] = useState({});
     const [materials, setMaterials] = useState();
@@ -129,4 +129,4 @@ const CourseDetail = ({ context }) => {
 
     );
 }
-export default withRouter(CourseDetail);
+export default withRouter(Course);

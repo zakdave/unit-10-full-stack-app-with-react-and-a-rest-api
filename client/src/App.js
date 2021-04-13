@@ -4,20 +4,21 @@ import './styles/global.css';
 
 import Header from './components/Header';
 import Courses from './components/Courses';
-import EachCourse from './components/EachCourse';
+import Course from './components/Course';
 
 import withContext from './Context';
 
 const HeaderContext = withContext(Header);
 const CoursesContext = withContext(Courses);
-const EachCourse = withContext(EachCourse);
+const CourseContext = withContext(Course);
 
 const App = () => (
   <BrowserRouter>
     <div>
       <HeaderContext/>
       <Switch>
-        <Route exact patch='/' component={CoursesContext}/>
+        <Route exact path='/' component={CoursesContext}/>
+        <Route exact path='/courses/:id' component={CourseContext} />
       </Switch>
     </div>
   </BrowserRouter>
