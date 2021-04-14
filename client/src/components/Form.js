@@ -1,11 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 
 const Form = (props) => {
     let history = useHistory();
     const form = history.location.pathname.slice(9);
-
+    
+    //Destructure props for use within handlers
     const {
         id,
         cancel,
@@ -15,11 +16,13 @@ const Form = (props) => {
         elements
     } = props;
 
+    //Handles submit
     function handleSubmit(event) {
         event.preventDefault();
         submit();
     }
 
+    //Handles cancel
     function handleCancel(event) {
         event.preventDefault();
         cancel();

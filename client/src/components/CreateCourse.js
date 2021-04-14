@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Form from './Form';
 
 export default class CreateCourse extends Component {
 
+    //Establish state for course info
     state = {
         courseTitle: '',
         courseDescription: '',
@@ -101,6 +102,7 @@ export default class CreateCourse extends Component {
         );
     }
 
+    //Update state based on input change
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -112,6 +114,7 @@ export default class CreateCourse extends Component {
         });
     };
 
+    //Submit function that saves updated course data to context and calls create course to send request with data to API
     submit = () => {
         const { context } = this.props;
         const userEmail = context.authenticatedUser.emailAddress;
@@ -136,6 +139,7 @@ export default class CreateCourse extends Component {
             userId
         };
 
+        //Send course info and auth info to API
         context.data.createCourse(course, userEmail, password)
             .then(errors => {
                 if (errors.length) {
@@ -149,6 +153,7 @@ export default class CreateCourse extends Component {
                 this.props.history.push('/error');
             });
     }
+    //Send user back to index '/'
     cancel = () => {
         this.props.history.push('/');
     }

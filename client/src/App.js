@@ -16,6 +16,7 @@ import NotFound from './components/NotFound';
 
 import withContext from './Context';
 
+//Wrap context around each subscribing component
 const HeaderContext = withContext(Header);
 const CoursesContext = withContext(Courses);
 const CourseContext = withContext(Course);
@@ -25,6 +26,7 @@ const SignOutContext = withContext(SignOut);
 const CreateCourseContext = withContext(CreateCourse);
 const UpdateCourseContext = withContext(UpdateCourse);
 
+//Establishes Router and defines routes with component. Not Found will be routed if others fail
 const App = () => (
   <BrowserRouter>
     <div>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Form from './Form';
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom';
 
 const UpdateCourse = ({ context }) => {
 
