@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom';
 
-const Course = ({context}) => {
+const CourseDetail = ({context}) => {
     
     let history = useHistory();
     const id = history.location.pathname.slice(9);
@@ -126,4 +126,4 @@ const Course = ({context}) => {
 
     );
 }
-export default withRouter(Course);
+export default withRouter(CourseDetail);

@@ -4,9 +4,9 @@ import './styles/global.css';
 
 import Header from './components/Header';
 import Courses from './components/Courses';
-import Course from './components/Course';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
+import CourseDetail from './components/CourseDetail';
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
 import SignOut from './components/SignOut';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateCourse from './components/CreateCourse';
@@ -19,9 +19,9 @@ import withContext from './Context';
 //Wrap context around each subscribing component
 const HeaderContext = withContext(Header);
 const CoursesContext = withContext(Courses);
-const CourseContext = withContext(Course);
-const SignUpContext = withContext(SignUp);
-const SignInContext = withContext(SignIn);
+const CourseDetailContext = withContext(CourseDetail);
+const UserSignUpContext = withContext(UserSignUp);
+const UserSignInContext = withContext(UserSignIn);
 const SignOutContext = withContext(SignOut);
 const CreateCourseContext = withContext(CreateCourse);
 const UpdateCourseContext = withContext(UpdateCourse);
@@ -35,9 +35,9 @@ const App = () => (
         <Route exact path='/' component={CoursesContext}/>
         <ProtectedRoute path="/courses/create" component={CreateCourseContext}/>
         <ProtectedRoute path='/courses/:id/update' component={UpdateCourseContext}/>
-        <Route exact path='/courses/:id' component={CourseContext}/>
-        <Route path='/signup' component={SignUpContext}/>
-        <Route path='/signin' component={SignInContext}/>
+        <Route exact path='/courses/:id' component={CourseDetailContext}/>
+        <Route path='/signup' component={UserSignUpContext}/>
+        <Route path='/signin' component={UserSignInContext}/>
         <Route path='/signout' component={SignOutContext}/>
         <Route path='/error' component={UnexpectedError}/>
         <Route component={NotFound}/>

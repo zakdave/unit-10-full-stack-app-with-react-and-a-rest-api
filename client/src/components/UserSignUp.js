@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Form from './Form';
 
-export default class SignUp extends Component {
+export default class UserSignUp extends Component {
 
     //Establish state for user information
     state = {
