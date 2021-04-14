@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactMarkdown from 'react-markdown';
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom';
 
-const Course = ({ context }) => {
+const Course = ({context}) => {
     
     let history = useHistory();
     const id = history.location.pathname.slice(9);
 
-    
     const [course, setCourse] = useState({});
     const [author, setAuthor] = useState({});
     const [materials, setMaterials] = useState();
     const [isLoading, setIsLoading] = useState(true);
-
+    
+    //If data is not loaded through API calls then useEffect will push '/error' 
     useEffect(() => {
         let mounted = true;
         context.data.api(`/courses/${id}`)
@@ -32,12 +32,12 @@ const Course = ({ context }) => {
                 }
             })
             .catch(error => {
-                console.log('Error fetching and parsing data, ', error)
+                console.log('Error: ', error)
                 history.push('/error');
             })
             .finally(() => setIsLoading(false));
         return () => mounted = false;
-    }, [context.data, id, history]);
+    }, [context.data, id, history]); //Renders when context data, id or history change
 
     const courseOwner = author.id;
     let authenticatedUser;
@@ -48,6 +48,7 @@ const Course = ({ context }) => {
         emailAddress = context.authenticatedUser.emailAddress;
     }
 
+    // Formating for materials section
     let materialsNeeded;
     if (typeof materials === 'string') {
         materialsNeeded = materials.split(",");
@@ -56,11 +57,8 @@ const Course = ({ context }) => {
     const password = context.authenticatedPassword;
 
     const handleDelete = () => {
-        const confirmation = window.confirm(`Are you sure you want to delete the course "${course.title}"?`);
-        if (confirmation) {
-            context.data.deleteCourse(id, emailAddress, password);
-            history.push('/');
-        }
+        context.data.deleteCourse(id, emailAddress, password);
+        history.push('/');
     }
 
 
@@ -88,7 +86,6 @@ const Course = ({ context }) => {
                     }
                 </div>
             </div>
-
             <div className="wrap">
                 {
                     isLoading

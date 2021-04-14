@@ -4,6 +4,7 @@ import Form from './Form';
 
 export default class SignUp extends Component {
 
+    //Establish state for user information
     state = {
         firstName: '',
         lastName: '',
@@ -93,6 +94,7 @@ export default class SignUp extends Component {
         );
     }
 
+    //Change state when input value changes 
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -104,6 +106,8 @@ export default class SignUp extends Component {
         });
     }
 
+    //Change state when form is filled out and submitted
+    //Validates password and signs user in 
     submit = () => {
         const { context } = this.props;
 
@@ -136,11 +140,11 @@ export default class SignUp extends Component {
                             .then(() => {
                                 this.props.history.push('/');
                             });
-                        console.log(`${firstName} ${lastName} is successfully signed up and authenticated!`);
+                        console.log(`${firstName} ${lastName} has been created as a user. `);
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    console.log('Error: ', err);
                     this.props.history.push('/error');
                 });
         } else if (password !== confirmPassword) {
@@ -150,6 +154,7 @@ export default class SignUp extends Component {
         }
     }
 
+    //Return to index '/'
     cancel = () => {
         this.props.history.push('/');
     }

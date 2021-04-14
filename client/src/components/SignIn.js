@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Form from './Form';
 
 export default class SignIn extends Component {
@@ -61,6 +61,7 @@ export default class SignIn extends Component {
         );
     }
 
+    //Change state when input value changes
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -72,29 +73,31 @@ export default class SignIn extends Component {
         });
 
     }
-
+    //Change state when form is filled out and submitted
+    //Validates password and signs user in 
     submit = () => {
-        const { context } = this.props;
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
-        const { emailAddress, password } = this.state;
+        const {context} = this.props;
+        const {from} = this.props.location.state || { from: { pathname: '/' } };
+        const {emailAddress, password} = this.state;
 
         context.actions.signIn(emailAddress, password)
             .then(user => {
                 if (user === null) {
                     this.setState(() => {
-                        return { errors: ['Sign-in was unsuccessful'] };
+                        return { errors: ['Log in unsuccesful'] };
                     });
                 } else {
                     this.props.history.push(from);
-                    console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+                    console.log(`${emailAddress} is now logged in. Credentials saved for 24 hours`);
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log('Error: ', err);
                 this.props.history.push('/error');
             })
     }
 
+    //Sends user back to index '/' 
     cancel = () => {
         this.props.history.push('/');
     }

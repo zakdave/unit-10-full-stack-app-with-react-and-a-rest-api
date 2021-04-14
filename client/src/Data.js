@@ -2,6 +2,7 @@ import {config} from './config';
 
 export default class Data {
 
+    // calls API and sets request info
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
         const url = config.urlBase + path;
 
@@ -24,6 +25,7 @@ export default class Data {
         return fetch(url, options);
     }
 
+    //Gets user information from API by sending GET request
     async getUser(emailAddress, password) {
         const response = await this.api('/users', 'GET', null, true, {
             emailAddress,
@@ -41,6 +43,7 @@ export default class Data {
         }
     }
 
+    //Creates user by sending POST request to API
     async createUser(user) {
         const response = await this.api('/users', 'POST', user);
         if (response.status === 201) {
@@ -56,6 +59,7 @@ export default class Data {
         }
     }
 
+    //Creates coures by sending POST requeste to API
     async createCourse(course, emailAddress, password) {
         const response = await this.api('/courses', 'POST', course, true, {
             emailAddress,
@@ -75,7 +79,7 @@ export default class Data {
             throw new Error();
         }
     }
- 
+    //Updates course by sending PUT request to API 
     async updateCourse(emailAddress, password, id, course) {
         const response = await this.api(`/courses/${id}`, 'PUT', course, true, {
             emailAddress,
@@ -95,7 +99,7 @@ export default class Data {
         }
 
     }
-    
+    //Deletes course by sending DELETE request to API
     async deleteCourse(id, emailAddress, password) {
         const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
             emailAddress,

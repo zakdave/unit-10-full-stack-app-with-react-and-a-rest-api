@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 export default class Header extends Component {
 
     render() {
-        const { context } = this.props;
+        const {context} = this.props;
         const authUser = context.authenticatedUser;
         return (
             <header>
