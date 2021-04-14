@@ -20,6 +20,7 @@ const UpdateCourse = ({ context }) => {
     const [isLoading, setIsLoading] = useState(true);
 
 
+    //Use effect to filter bad API response data, and routes that are not allowed based on authentication
     useEffect(() => {
         let mounted = true;
         context.data.api(`/courses/${id}`)
@@ -27,10 +28,12 @@ const UpdateCourse = ({ context }) => {
             .then(data => {
                 if (mounted) {
                     if (data.message === "Course not found") {
-                        history.push('/notfound')
+                        console.log('Course not found');
+                        history.push('/error')
                     }
                     if (data.User && data.User.id !== context.authenticatedUser.id) {
-                        history.push('/forbidden')
+                        console.log("Sorry, that's not allowed")
+                        history.push('/error')
                     }
                     setCourse(data);
                     setAuthor(data.User);
@@ -42,13 +45,14 @@ const UpdateCourse = ({ context }) => {
                 }
             })
             .catch(error => {
-                console.log('Error fetching and parsing data', error)
+                console.log('Error :', error)
                 history.push('/error');
             })
             .finally(() => setIsLoading(false));
         return () => mounted = false;
-    }, [context.data, id, course.userId, context.authenticatedUser.id, history]);
+    }, [context.data, id, course.userId, context.authenticatedUser.id, history]); //Renders when context data, id, course id, userid and histroy are altered
 
+    //Change value and update state using swtich found in React Hooks course
     const change = (event) => {
         const value = event.target.value;
         const name = event.target.name;
@@ -81,10 +85,12 @@ const UpdateCourse = ({ context }) => {
         materialsNeeded = "";
     }
 
+    // Sends user pack to course page '/courses/:id'
     const cancel = () => {
         history.push(`/courses/${id}`);
     }
 
+    //Handles submit for course, establishes course object and updates context
     const submit = () => {
         const course = {
             title,
@@ -103,11 +109,11 @@ const UpdateCourse = ({ context }) => {
                     setErrors(errors);
                 } else {
                     history.push('/');
-                    console.log("You have successfully updated the course!")
+                    console.log("Course updated")
                 }
             })
             .catch((err) => {
-                console.log(err);
+                console.log('Error: ', err);
                 history.push('/error');
             });
     }

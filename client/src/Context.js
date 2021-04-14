@@ -7,6 +7,7 @@ const Context = React.createContext();
 
 export class Provider extends Component {
 
+    //Setting state for authenticated user
     state = {
         authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
         authenticatedPassword: Cookies.getJSON('authenticatedPassword') || null,
@@ -40,6 +41,7 @@ export class Provider extends Component {
         );
     }
 
+    //Sign in function that sets state and Cookie authentication within the browser
     signIn = async (emailAddress, password) => {
         const user = await this.data.getUser(emailAddress, password);
         if (user !== null) {
@@ -55,7 +57,7 @@ export class Provider extends Component {
         }
         return user;
     }
-
+    //Sign out function that removes authentication state and removes authentication cookie
     signOut = () => {
         this.setState({
             authenticatedUser: null,

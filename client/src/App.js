@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UnexpectedError from './components/UnexpectedError';
+import NotFound from './components/NotFound';
 
 import withContext from './Context';
 
@@ -37,6 +38,7 @@ const App = () => (
         <Route path='/signin' component={SignInContext}/>
         <Route path='/signout' component={SignOutContext}/>
         <Route path='/error' component={UnexpectedError}/>
+        <Route component={NotFound}/>
       </Switch>
     </div>
   </BrowserRouter>
