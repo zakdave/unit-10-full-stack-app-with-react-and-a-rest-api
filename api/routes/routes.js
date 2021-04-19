@@ -105,9 +105,9 @@ router.post('/users', asyncHandler(async (req, res) => {
         res.location("/").status(201).end();
     } catch (error) {
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
-            let errorMessageArray = [];
-            error.errors.forEach(err =>  errorMessageArray.push(err.message));
-            res.status(400).json({errorMessageArray});
+            let errors = [];
+            error.errors.forEach(err =>  errors.push(err.message));
+            res.status(400).json({errors});
         } else {
             throw error;
         }
@@ -122,17 +122,16 @@ router.post('/courses', authenticateUser(), asyncHandler(async (req, res) => {
         res.status(201).end();
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
-            let errorMessageArray = [];
-            error.errors.forEach(each => errorMessageArray.push(each.message))
-            res.status(400).json({errorMessageArray});
+            let errors = [];
+            error.errors.forEach(each => errors.push(each.message))
+            res.status(400).json({errors});
         }
     }
 }));
 
-//PUT route for editing course
+// PUT route for editing course
 router.put('/courses/:id', authenticateUser(),asyncHandler(async(req, res) => {
-    let errorMessage;
-    if (req.body.title && req.body.description) {
+    try { let errorMessage;
         let course = await Course.findByPk(req.params.id);
         if (course) {
             if (course.userId == req.currentUser.id) {
@@ -140,18 +139,25 @@ router.put('/courses/:id', authenticateUser(),asyncHandler(async(req, res) => {
                 res.sendStatus(204);
             } else {
                 errorMessage = `Only the owner can update this course.`;
-                res.status(403).json({err});
+                res.status(403).json(errorMessage);
             } 
         } else {
             errorMessage = 'Course not found.';
-        }  
-    }else{
-        err = `Please provide a title and description.`;
+            res.status(404).json(errorMessage)
+        } 
+    } catch(error){
+        if (error.name === "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError") {
+            const errors = error.errors.map(err => err.message);
+            res.status(400).json({ errors });
+        } else {
+            throw error;
+        }
     }
     if(err){
         res.status(400).json({err});
     }
 }));
+
 
 //DELETE route for specific course
 router.delete('/courses/:id', authenticateUser(), asyncHandler(async (req, res) => {

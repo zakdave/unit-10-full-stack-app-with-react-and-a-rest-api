@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: 'A description is required',
+                    msg: 'A description is required.',
                 },
                 notEmpty: {
                     msg: 'Description cannot be empty.',
