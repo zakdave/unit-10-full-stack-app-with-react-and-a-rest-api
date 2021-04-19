@@ -7,7 +7,7 @@ import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
-import SignOut from './components/SignOut';
+import UserSignOut from './components/UserSignOut';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
@@ -22,7 +22,7 @@ const CoursesContext = withContext(Courses);
 const CourseDetailContext = withContext(CourseDetail);
 const UserSignUpContext = withContext(UserSignUp);
 const UserSignInContext = withContext(UserSignIn);
-const SignOutContext = withContext(SignOut);
+const UserSignOutContext = withContext(UserSignOut);
 const CreateCourseContext = withContext(CreateCourse);
 const UpdateCourseContext = withContext(UpdateCourse);
 
@@ -38,7 +38,7 @@ const App = () => (
         <Route exact path='/courses/:id' component={CourseDetailContext}/>
         <Route path='/signup' component={UserSignUpContext}/>
         <Route path='/signin' component={UserSignInContext}/>
-        <Route path='/signout' component={SignOutContext}/>
+        <Route path='/signout' component={UserSignOutContext}/>
         <Route path='/error' component={UnexpectedError}/>
         <Route component={NotFound}/>
       </Switch>
