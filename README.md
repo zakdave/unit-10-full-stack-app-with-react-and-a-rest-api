@@ -8,6 +8,5 @@ The user is able to create an account, log in, and create, update and view cours
 ## Run
 * Go to the api directory and run ```npm install```, ```npm run seed```, ```npm start``` 
 * This will seed database with starter data and will run the API
-
-*Navigate to the client directory and run ```npm install```, ```npm start```
-*You can view the application at https://localhost:3000
+* Navigate to the client directory and run ```npm install```, ```npm start```
+* You can view the application at https://localhost:3000
