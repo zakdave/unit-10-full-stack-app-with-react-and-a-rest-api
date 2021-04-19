@@ -52,20 +52,21 @@ module.exports = (sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
-            set(val) {
-                const hashedPass = bcrypt.hashSync(val, 10)
-                this.setDataValue('password', hashedPass)
-            },
             validate:{
                 notNull: {
                     msg: "A password is required."
                 },
                 notEmpty: {
                     msg: 'Password cannot be empty.'
+                },
+
+                set(val) {
+                const hashedPass = bcrypt.hashSync(val, 10)
+                this.setDataValue('password', hashedPass)
                 }
             }
         }
-    },{ sequelize });
+    }, { sequelize });
 
     // Establish data relationship and FK  
     User.associate = (models) => {
